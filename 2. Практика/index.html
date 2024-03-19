@@ -10,10 +10,9 @@
             integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
             crossorigin="anonymous"
         />
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                createTodoApp(document.getElementById("todo-app"), "Мои дела", "my");
-            });
+        <script type="module">
+            import { createTodoApp } from "./todo-app.js";
+            createTodoApp(document.getElementById("todo-app"), "Мои дела", "my");
         </script>
     </head>
     <body>
@@ -26,5 +25,4 @@
         </div>
         <div id="todo-app" class="container"></div>
     </body>
-    <script src="todo-app.js"></script>
 </html>

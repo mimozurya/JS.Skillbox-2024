@@ -69,20 +69,20 @@ function createTodoItem(todoElement, todoArray, keyLocalStorage) {
         item.classList.add("list-group-item-success");
     }
 
-    doneButton.addEventListener("click", function () {
-        item.classList.toggle("list-group-item-success");
-        todoElement.done = item.classList.contains("list-group-item-success");
-        saveDataToLocalStorage(keyLocalStorage, todoArray);
-    });
+    // doneButton.addEventListener("click", function () {
+    //     item.classList.toggle("list-group-item-success");
+    //     todoElement.done = item.classList.contains("list-group-item-success");
+    //     saveDataToLocalStorage(keyLocalStorage, todoArray);
+    // });
 
-    deleteButton.addEventListener("click", function () {
-        if (confirm("Вы уверены?")) {
-            let index = todoArray.findIndex((elem) => elem.id === todoElement.id);
-            todoArray.splice(index, 1);
-            item.remove();
-            saveDataToLocalStorage(keyLocalStorage, todoArray);
-        }
-    });
+    // deleteButton.addEventListener("click", function () {
+    //     if (confirm("Вы уверены?")) {
+    //         let index = todoArray.findIndex((elem) => elem.id === todoElement.id);
+    //         todoArray.splice(index, 1);
+    //         item.remove();
+    //         saveDataToLocalStorage(keyLocalStorage, todoArray);
+    //     }
+    // });
 
     return {
         item,
@@ -92,7 +92,7 @@ function createTodoItem(todoElement, todoArray, keyLocalStorage) {
 }
 
 function createTodoApp(container, title = "Список дел", listName) {
-    let todoArray = getDataFromLocalStorage(listName) || [];
+    // let todoArray = getDataFromLocalStorage(listName) || [];
     let todoAppTitle = createAppTitle(title); // заголовок
     let todoItemForm = createTodoItemForm(); // форма заполнения
     let todoList = createTodoList(); // создание листа задач
@@ -150,38 +150,38 @@ function createTodoApp(container, title = "Список дел", listName) {
     });
 }
 
-function dataToJson(data) {
-    // вернет входящиее данные в виде строки
-    return JSON.stringify(data);
-}
+// function dataToJson(data) {
+//     // вернет входящиее данные в виде строки
+//     return JSON.stringify(data);
+// }
 
-function jsonToData(data) {
-    // вернет входящую строку в виде данных
-    return JSON.parse(data);
-}
+// function jsonToData(data) {
+//     // вернет входящую строку в виде данных
+//     return JSON.parse(data);
+// }
 
-function getData(listName) {
-    // вернет данные из LocalStorage
-    return localStorage.getItem(listName);
-}
+// function getData(listName) {
+//     // вернет данные из LocalStorage
+//     return localStorage.getItem(listName);
+// }
 
-function setData(listName, data) {
-    // запишет данные в LocalStorage
-    return localStorage.setItem(listName, data);
-}
+// function setData(listName, data) {
+//     // запишет данные в LocalStorage
+//     return localStorage.setItem(listName, data);
+// }
 
-function saveDataToLocalStorage(key, data) {
-    const jsonData = dataToJson(data);
-    setData(key, jsonData);
-}
+// function saveDataToLocalStorage(key, data) {
+//     const jsonData = dataToJson(data);
+//     setData(key, jsonData);
+// }
 
-function getDataFromLocalStorage(key) {
-    function getCartData() {
-        let cartData = localStorage.getItem(key);
-        return cartData;
-    }
-    let result = getCartData();
-    return jsonToData(result);
-}
+// function getDataFromLocalStorage(key) {
+//     function getCartData() {
+//         let cartData = localStorage.getItem(key);
+//         return cartData;
+//     }
+//     let result = getCartData();
+//     return jsonToData(result);
+// }
 
 export { createTodoApp };
