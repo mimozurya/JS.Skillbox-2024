@@ -1,26 +1,30 @@
-import { useRef, useState, FC } from "react";
+import { useState, FC } from "react";
 import { Button, Col, Form, Row, Stack } from "react-bootstrap";
-import { NoteData, Tag } from "../../../entities/model";
+import { Note, NoteData, Tag } from "../../../entities/model";
 import CreatebleReactSelect from "react-select/creatable";
-import { useInput } from "../../../entities/hooks/useInput";
 import { v4 as uuidv4 } from "uuid";
+import { useNavigate } from "react-router-dom";
 
 type NoteFormProps = {
-    onSubmit: (data: NoteData) => void;
+    onSubmit: (data: NoteData, id: string | undefined) => void;
     onAddTag: (tag: Tag) => void;
+    availableTags: Tag[];
+    note?: Note;
 };
 
 const NoteForm: FC<NoteFormProps> = (props: NoteFormProps) => {
-    const { onSubmit, onAddTag } = props;
+    const { onSubmit, onAddTag, availableTags, note } = props;
 
-    const titleRef = useRef<HTMLInputElement>(null);
-    const [markdown, setMarkdown] = useState<string>("");
-    const [value, setValue] = useInput();
-    const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
+    const navigate = useNavigate();
+
+    const [title, setTitle] = useState<string>(note?.title ?? "");
+    const [markdown, setMarkdown] = useState<string>(note?.markdown ?? "");
+    const [selectedTags, setSelectedTags] = useState<Tag[]>(note?.tags ?? []);
 
     function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
-        onSubmit({ title: titleRef.current!.value, markdown: markdown, tags: [] });
+        onSubmit({ title, markdown: markdown, tags: selectedTags }, note?.id);
+        navigate("/");
     }
 
     return (
@@ -30,7 +34,12 @@ const NoteForm: FC<NoteFormProps> = (props: NoteFormProps) => {
                     <Col>
                         <Form.Group controlId="title">
                             <Form.Label>Title</Form.Label>
-                            <Form.Control ref={titleRef} className="title" required />
+                            <Form.Control
+                                value={title}
+                                onChange={(e) => setTitle(e.target.value)}
+                                className="title"
+                                required
+                            />
                         </Form.Group>
                     </Col>
                     <Col>
@@ -44,6 +53,10 @@ const NoteForm: FC<NoteFormProps> = (props: NoteFormProps) => {
                                         tags.map(({ label, value }) => ({ label, id: value }))
                                     )
                                 }
+                                options={availableTags.map(({ label, id }) => ({
+                                    label,
+                                    value: id,
+                                }))}
                                 onCreateOption={(label) => {
                                     const newTag = { label, id: uuidv4() };
                                     onAddTag(newTag);
@@ -59,6 +72,7 @@ const NoteForm: FC<NoteFormProps> = (props: NoteFormProps) => {
                             <Form.Control
                                 onChange={(e) => setMarkdown(e.target.value)}
                                 required
+                                value={markdown}
                                 as="textarea"
                             />
                         </Form.Group>
@@ -73,8 +87,6 @@ const NoteForm: FC<NoteFormProps> = (props: NoteFormProps) => {
                     Cancel
                 </Button>
             </Stack>
-            <input value={value} onChange={setValue} />
-            {value}
         </Form>
     );
 };

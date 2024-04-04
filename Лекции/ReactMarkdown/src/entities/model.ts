@@ -22,3 +22,10 @@ export type RawNoteData = {
 export type RawNote = {
     id: string;
 } & RawNoteData;
+
+export type NoteListFilters = {
+    title: string;
+    selectedTags: Tag[];
+};
+
+export type NoteListFiltersKeys = keyof NoteListFilters;
