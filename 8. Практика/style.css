@@ -1,0 +1,31 @@
+div {
+    display: block;
+}
+
+.alert {
+    color: red;
+}
+
+.form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10rem;
+    flex-direction: column;
+}
+
+input {
+    width: 30rem;
+    height: 2rem;
+    margin-bottom: 2rem;
+    margin-top: 0.25rem;
+    font-size: 1.2em;
+}
+
+label {
+    font-size: 1.5em;
+}
+
+img {
+    max-width: 50px;
+}
