@@ -146,7 +146,7 @@ class AmazingCard extends Card {
 
                 text.textContent = "Осталось времени:";
                 input.value = 60;
-                var counter = setInterval(timer, 1000);
+                let counter = setInterval(timer, 1000);
                 function timer() {
                     if (!isNaN(value)) input.value--;
                     if (input.value <= 0 && input.value !== "Успел!") {

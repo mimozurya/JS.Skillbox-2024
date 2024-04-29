@@ -34,9 +34,11 @@ export function render(data) {
 
     const container = document.createElement("div");
     container.classList.add("container", "py-4");
+
+    const { title, opening_crawl } = data;
     container.innerHTML = `
-        <h1>Детальная информация о фильме: Звездные войны: "${data.title}"</h1>
-        <p class="lead">${data.opening_crawl}</p>
+        <h1>Детальная информация о фильме: Звездные войны: "${title}"</h1>
+        <p class="lead">${opening_crawl}</p>
         <h2 class="display-3">Planets</h2>
         <ul class="planets-list"></ul>
         <h2 class="display-3">Species</h2>
