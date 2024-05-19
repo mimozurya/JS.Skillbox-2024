@@ -1,0 +1,61 @@
+.modal-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    background: rgba(0, 0, 0, 0.6);
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: none;
+}
+
+.modal-container.open {
+    display: flex;
+}
+
+.modal {
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: 1rem;
+    display: flex;
+    height: 50vh;
+    width: 40vw;
+    background: white;
+    border-radius: 8px;
+    border: 1px solid black;
+    padding: 20px;
+}
+
+.modal__title {
+    font-size: 2em;
+    padding: 0;
+    margin: 2rem;
+}
+
+.modal__input {
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid black;
+    width: 90%;
+    padding: 15px 10px;
+}
+
+.modal__input:hover {
+    border: 1px solid darkblue;
+}
+
+.modal__input {
+    height: 2rem;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.modal__add {
+    background: green;
+    margin-top: 2rem;
+    font-size: 1rem;
+    color: white;
+    padding: 1rem;
+}

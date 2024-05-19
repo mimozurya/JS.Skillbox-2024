@@ -1,0 +1,29 @@
+.userPageContainer {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.leftSide {
+    margin-right: 20px;
+    img {
+        width: 40vh;
+    }
+}
+.rightSide {
+    p {
+        margin: 0;
+        padding: 10px;
+        font-size: 4vh;
+    }
+    .buttons {
+        margin-top: 1rem;
+        button {
+            font-size: 1.5rem;
+            background-color: rgba(225, 255, 0, 0.2);
+            cursor: pointer;
+            margin-right: 3rem;
+        }
+    }
+}

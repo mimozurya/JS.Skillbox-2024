@@ -1,0 +1,38 @@
+body {
+    background-color: white;
+    font-size: 16px;
+    padding: 0;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    gap: 50px;
+}
+
+.card-container {
+    background: rgb(2, 0, 36);
+    background: linear-gradient(
+        105deg,
+        rgba(2, 0, 36, 0.2413340336134454) 0%,
+        rgba(0, 212, 255, 0.13489145658263302) 100%
+    );
+    border: 1px solid black;
+    width: 15rem;
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 15px;
+        .card-img {
+            img {
+                width: 100px;
+                height: 100px;
+            }
+        }
+    }
+}
