@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-// import "./Registration.module.scss";
 import styles from "./Registration.module.scss";
 
 const Registration = () => {
@@ -31,6 +30,7 @@ const Registration = () => {
                         };
                     });
                     localStorage.setItem("user", JSON.stringify(user));
+                    window.location.href = "/";
                 }
             })
             .catch((error) => {

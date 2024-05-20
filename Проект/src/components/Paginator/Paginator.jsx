@@ -1,4 +1,5 @@
 import React, { useMemo } from "react";
+
 import styles from "./Paginator.module.scss";
 import PaginatorButton from "./PaginatorButton/PaginatorButton";
 

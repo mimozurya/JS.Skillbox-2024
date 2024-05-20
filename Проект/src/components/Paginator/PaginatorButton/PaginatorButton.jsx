@@ -1,4 +1,5 @@
 import React from "react";
+
 import styles from "./PaginatorButton.module.scss";
 import classNames from "classnames";
 

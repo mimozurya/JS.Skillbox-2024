@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import styles from "./Modal.module.scss";
 import classNames from "classnames";
+
+import styles from "./Modal.module.scss";
 
 const Modal = React.memo((props) => {
     const { open, close, user, changeOldUser } = props;

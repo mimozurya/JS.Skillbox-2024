@@ -1,9 +1,10 @@
 import React from "react";
 import axios from "axios";
+
 import { useEffect, useState, useCallback } from "react";
 import { Link, useParams } from "react-router-dom";
-import "./UserPage.scss";
 
+import "./UserPage.scss";
 import Modal from "./Modal/Modal";
 
 const UserPage = () => {

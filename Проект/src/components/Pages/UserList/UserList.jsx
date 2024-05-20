@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { useEffect, useState, useMemo } from "react";
+import { useLocalStorage } from "../../hook/useLocalStorage";
 
 import CardElement from "../../Card/CardElement";
 import Paginator from "../../Paginator/Paginator";
@@ -14,7 +15,7 @@ const UserList = () => {
         page: 1,
         sorting: "",
     });
-    const [siteUser, setSiteUser] = useState();
+    const [siteUser, setSiteUser] = useLocalStorage("user", []);
 
     function updateFilter(name, value) {
         setFilter({ ...filter, [name]: value });
@@ -22,7 +23,6 @@ const UserList = () => {
 
     useEffect(() => {
         async function fetchData() {
-            getData();
             axios
                 .get("https://reqres.in/api/users")
                 .then((res) => res.data)
@@ -39,14 +39,11 @@ const UserList = () => {
                 .catch((err) => setUsers([]));
         }
         fetchData();
-        console.log(siteUser, "после fetchdata");
-    }, []);
 
-    function getData() {
-        setSiteUser(JSON.parse(localStorage.getItem("user")));
-        console.log(JSON.parse(localStorage.getItem("user")), "getdata");
-        console.log(siteUser, "сайт юзер из getdata");
-    }
+        if (siteUser.length === 0) {
+            window.location.href = "/registration";
+        }
+    }, []);
 
     const filteredSortedUsers = useMemo(() => {
         if (!users.length) return [];
@@ -67,7 +64,12 @@ const UserList = () => {
     const pageIndex = PAGE_SIZE * (filter.page - 1);
 
     return (
-        <div className="main-container">
+        <div className="container">
+            <div className="siteUser">
+                <p>
+                    Вы вошли как: {siteUser.firstname} {siteUser.lastname}
+                </p>
+            </div>
             <input
                 className="user-input"
                 value={filter.searching}
@@ -80,14 +82,12 @@ const UserList = () => {
                 placeholder="Поиск..."
             />
 
-            {users.length ? (
-                <div className="container">
+            {users.length && (
+                <div className="c-container">
                     {filteredSortedUsers.slice(pageIndex, 3 + pageIndex).map((user) => (
                         <CardElement key={user.id} data={user} />
                     ))}
                 </div>
-            ) : (
-                <h2>постов нет</h2>
             )}
 
             {pagesCount > 1 && (

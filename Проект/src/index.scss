@@ -9,8 +9,14 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     padding: 40px;
     gap: 50px;
+}
+
+.c-container {
+    display: flex;
+    gap: 30px;
 }
 
 .card-container {
@@ -34,5 +40,16 @@ body {
                 height: 100px;
             }
         }
+        .card-text {
+            margin-top: 2vh;
+            font-size: 1.2rem;
+        }
     }
+}
+
+.btn-go {
+    margin-top: 5vh;
+    width: 10vw;
+    height: 5vh;
+    font-size: 1rem;
 }

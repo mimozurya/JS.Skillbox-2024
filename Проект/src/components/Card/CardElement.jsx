@@ -16,7 +16,7 @@ const CardElement = (props) => {
                     <p>{email}</p>
                 </div>
                 <Link to={`/user/${id}`}>
-                    <button>Перейти на профиль</button>
+                    <button className="btn-go">Перейти на профиль</button>
                 </Link>
             </div>
         </div>
