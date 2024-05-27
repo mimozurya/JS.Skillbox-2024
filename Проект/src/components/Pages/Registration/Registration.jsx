@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styles from "./Registration.module.scss";
+import { CONFIG } from "../../../shared/regConfig";
 
 const Registration = () => {
     const [user, setUser] = useState({
@@ -12,6 +14,8 @@ const Registration = () => {
         id: "",
         token: "",
     });
+
+    // const navigate = useNavigate();
 
     const registerUserAPI = () => {
         axios
@@ -31,6 +35,7 @@ const Registration = () => {
                     });
                     localStorage.setItem("user", JSON.stringify(user));
                     window.location.href = "/";
+                    // navigate("/"); не скидывает id и token в localstorage
                 }
             })
             .catch((error) => {
@@ -47,71 +52,23 @@ const Registration = () => {
             <div className={styles["formReg"]}>
                 <h1>Привет</h1>
                 <p>Давай создадим аккаунт</p>
-                <div className={styles["inputContainer"]}>
-                    <input
-                        type="text"
-                        placeholder="Имя"
-                        value={user.firstname}
-                        onChange={(e) =>
-                            setUser({
-                                ...user,
-                                firstname: e.target.value,
-                            })
-                        }
-                    />
-                </div>
-                <div className={styles["inputContainer"]}>
-                    <input
-                        type="text"
-                        placeholder="Фамилия"
-                        value={user.lastname}
-                        onChange={(e) =>
-                            setUser({
-                                ...user,
-                                lastname: e.target.value,
-                            })
-                        }
-                    />
-                </div>
-                <div className={styles["inputContainer"]}>
-                    <input
-                        type="text"
-                        placeholder="Email"
-                        value={user.email}
-                        onChange={(e) =>
-                            setUser({
-                                ...user,
-                                email: e.target.value,
-                            })
-                        }
-                    />
-                </div>
-                <div className={styles["inputContainer"]}>
-                    <input
-                        type="text"
-                        placeholder="Пароль"
-                        value={user.password}
-                        onChange={(e) =>
-                            setUser({
-                                ...user,
-                                password: e.target.value,
-                            })
-                        }
-                    />
-                </div>
-                <div className={styles["inputContainer"]}>
-                    <input
-                        type="text"
-                        placeholder="Ссылка на аватар"
-                        value={user.avatar}
-                        onChange={(e) =>
-                            setUser({
-                                ...user,
-                                avatar: e.target.value,
-                            })
-                        }
-                    />
-                </div>
+
+                {CONFIG.map((item) => (
+                    <div key={item.field} className={styles["inputContainer"]}>
+                        <input
+                            type="text"
+                            placeholder={item.placeholder}
+                            value={user[item.field]}
+                            onChange={(e) =>
+                                setUser({
+                                    ...user,
+                                    [item.field]: e.target.value,
+                                })
+                            }
+                        />
+                    </div>
+                ))}
+
                 <button className={styles["btnReg"]} onClick={registerUserAPI}>
                     Зарегистрироваться
                 </button>

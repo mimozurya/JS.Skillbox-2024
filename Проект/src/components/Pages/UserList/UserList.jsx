@@ -1,7 +1,8 @@
 import React from "react";
 import axios from "axios";
 import { useEffect, useState, useMemo } from "react";
-import { useLocalStorage } from "../../hook/useLocalStorage";
+import { useNavigate } from "react-router-dom";
+import { useLocalStorage } from "../../../entities/hook/useLocalStorage";
 
 import CardElement from "../../Card/CardElement";
 import Paginator from "../../Paginator/Paginator";
@@ -17,6 +18,8 @@ const UserList = () => {
     });
     const [siteUser, setSiteUser] = useLocalStorage("user", []);
 
+    const navigate = useNavigate();
+
     function updateFilter(name, value) {
         setFilter({ ...filter, [name]: value });
     }
@@ -28,20 +31,26 @@ const UserList = () => {
                 .then((res) => res.data)
                 .then((data) => {
                     const usersData = data.data;
-                    const modifiedUsers = usersData.map((userData) => ({
-                        id: userData.id,
-                        name: userData.first_name + " " + userData.last_name,
-                        email: userData.email,
-                        avatar: userData.avatar,
-                    }));
-                    setUsers(modifiedUsers);
+                    console.log(data);
+                    const modifiedUsers = usersData.map((userData) => {
+                        const { id, first_name, last_name, email, avatar } = userData;
+                        return {
+                            id,
+                            name: [first_name, last_name].join(" "),
+                            email,
+                            avatar,
+                        };
+                    });
+                    setUsers(...users, modifiedUsers);
                 })
                 .catch((err) => setUsers([]));
         }
         fetchData();
 
         if (siteUser.length === 0) {
-            window.location.href = "/registration";
+            // с navigate не дает сделать !siteUser.length
+            // window.location.href = "/registration";
+            navigate("/registration");
         }
     }, []);
 

@@ -11,7 +11,7 @@ const Modal = React.memo((props) => {
     }
 
     function setUser() {
-        if (changeUser.first_name && changeUser.last_name && changeUser.email) {
+        if (![first_name, last_name, email].includes("")) {
             changeOldUser(changeUser);
             close();
             setChangeUser({ id: "", first_name: "", last_name: "", email: "", avatar: "" });
@@ -20,11 +20,11 @@ const Modal = React.memo((props) => {
 
     const { id, first_name, last_name, email, avatar } = user;
     const [changeUser, setChangeUser] = useState({
-        id: id,
-        first_name: first_name,
-        last_name: last_name,
-        email: email,
-        avatar: avatar,
+        id,
+        first_name,
+        last_name,
+        email,
+        avatar,
     });
 
     return (

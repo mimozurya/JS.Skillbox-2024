@@ -34,13 +34,13 @@ body {
         flex-direction: column;
         align-items: center;
         margin: 15px;
-        .card-img {
+        &-img {
             img {
                 width: 100px;
                 height: 100px;
             }
         }
-        .card-text {
+        &-text {
             margin-top: 2vh;
             font-size: 1.2rem;
         }
